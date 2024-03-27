@@ -1,30 +1,27 @@
 import { ConnectRouter } from "@connectrpc/connect";
 import { TaskService } from "@/cloud/todo/v1/todo_connect";
 import type { CreateTaskRequest, UpdateTaskRequest, DeleteTaskRequest, GetTasksRequest } from "@/cloud/todo/v1/todo_pb";
-import  firebaseAdmin from "@/firebase/adminApp";
-import {authContextKey} from '@/lib/server/context/contextKey';
-import  { loggedInUser } from "@/lib/server/auth/auth";
-import  { useListTask } from "@/lib/tasks/hooks/use-list-task";
-import  { useDeleteTask } from "@/lib/tasks/hooks/use-delete-task";
-import  { useUpdateTask } from "@/lib/tasks/hooks/use-update-task";
-import  { useCreateTask } from "@/lib/tasks/hooks/use-create-task";
-
-const firestore = firebaseAdmin.firestore();
-
-// TODO (YUVRAJ): Added server sided validation using protovalidate-ts(comming soon)
+import { authContextKey } from "@/lib/server/context/contextKey";
+import { loggedInUser } from "@/lib/server/auth/auth";
+import { useListTask } from "@/lib/tasks/hooks/use-list-task";
+import { useDeleteTask } from "@/lib/tasks/hooks/use-delete-task";
+import { useUpdateTask } from "@/lib/tasks/hooks/use-update-task";
+import { useCreateTask } from "@/lib/tasks/hooks/use-create-task";
 
 export default (router: ConnectRouter) => router.service(TaskService, {
-    async create( req: CreateTaskRequest, context: any) {
-
+    async create(req: CreateTaskRequest, context: any) {
         try {
-            const user = await loggedInUser(context.values.get(authContextKey))
-            // Update the task data in Firestore
+            // Get the logged-in user
+            const user = await loggedInUser(context.values.get(authContextKey));
+            
+            // Create a new task in Firestore
             await useCreateTask({
                 title: req.title,
                 description: req.description,
                 status: req.status,
                 userId: user,
             });
+            
             return { message: `Task created with ID:` };
         } catch (error) {
             console.error("Error creating task:", error);
@@ -33,8 +30,10 @@ export default (router: ConnectRouter) => router.service(TaskService, {
     },
     async update(req: UpdateTaskRequest, context: any) {
         try {
-            const user = await loggedInUser(context.values.get(authContextKey))
-            // Update the task data in Firestore
+            // Get the logged-in user
+            const user = await loggedInUser(context.values.get(authContextKey));
+            
+            // Update the task in Firestore
             await useUpdateTask({
                 id: req.id,
                 title: req.title,
@@ -51,6 +50,7 @@ export default (router: ConnectRouter) => router.service(TaskService, {
     },
     async delete(req: DeleteTaskRequest) {
         try {
+            // Delete the task from Firestore
             await useDeleteTask(req.id);
             return { message: `Task deleted with ID: ${req.id}` };
         } catch (error) {
@@ -59,8 +59,11 @@ export default (router: ConnectRouter) => router.service(TaskService, {
         }
     },
     async get(req: GetTasksRequest, context: any) {
-        try {   
-            const user = await loggedInUser(context.values.get(authContextKey))
+        try {
+            // Get the logged-in user
+            const user = await loggedInUser(context.values.get(authContextKey));
+            
+            // Get the list of tasks for the user from Firestore
             return await useListTask(user);
         } catch (error) {
             console.error("Error fetching tasks:", error);

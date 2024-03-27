@@ -1,0 +1,18 @@
+name: Build
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    types: [opened, reopened]
+  workflow_dispatch:
+jobs:
+  build:
+    name: Build App
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm install --force
+      - run: npm run lint
