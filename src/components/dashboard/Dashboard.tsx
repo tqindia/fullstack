@@ -38,6 +38,7 @@ export default function DashboardComponent() {
         }).then((response : any) => {
             setTasks(response.tasks);
         }).catch((err) => {
+          console.log(err)
         });
     };
 
