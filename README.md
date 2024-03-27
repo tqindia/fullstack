@@ -1,6 +1,6 @@
 # Next.js ConnectRPC Firebase
 
-Next.js serverless APP with Firebase, React Hooks and ConnectRPC Server, It's a demonstartion of how to write RPC. 
+Next.js serverless APP with Firebase, React Hooks and ConnectRPC Server, It's a demonstration of how to write RPC. 
 
 ## Motivation 
 
