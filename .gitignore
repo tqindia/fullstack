@@ -13,7 +13,7 @@ src/**/dist
 
 # production
 /build
-
+.env
 # 😡
 .DS_Store 
 *.pem

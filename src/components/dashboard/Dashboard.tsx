@@ -2,12 +2,11 @@ import React, {useEffect, useState} from 'react';
 import FilterInput from './Filter';
 import CreateTaskDialog from './CreateTaskDialog';
 import TaskColumns from './TaskColumns';
-import {GetTasksRequest, SuccessResponse, DeleteTaskRequest, Task, CreateTaskRequest} from '@/cloud/todo/v1/todo_pb';
+import {GetTasksRequest,Task, CreateTaskRequest} from '@/cloud/todo/v1/todo_pb';
 import apiCloud from '@/services/cloud';
 import {useToast} from '@/components/ui/use-toast';
-import {Skeleton} from '@/components/ui/skeleton';
 import {toast as reactToast} from 'react-hot-toast';
-import {Dialog} from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
 
 export default function DashboardComponent() {
     const {toast} = useToast();
@@ -19,15 +18,7 @@ export default function DashboardComponent() {
         setIsChanged] = useState < boolean > (false);
     const [selectedStatus,
         setSelectedStatus] = useState < string > ('3');
-    const [title,
-        setTitle] = useState('');
-    const [description,
-        setDescription] = useState('');
-    const [open,
-        setOpen] = useState(false);
 
-    const [animation,
-        setAnimation] = useState(false);
     useEffect(() => {
         fetchData();
     }, [isChanged]);
@@ -46,9 +37,7 @@ export default function DashboardComponent() {
             error: 'Something goes wrong'
         }).then((response : any) => {
             setTasks(response.tasks);
-            setAnimation(false)
         }).catch((err) => {
-            setAnimation(false)
         });
     };
 
@@ -79,9 +68,14 @@ export default function DashboardComponent() {
             newTask.description = description;
             newTask.status = 1;
             setIsChanged(!isChanged);
-            setOpen(false);
         });
     };
+
+    const searchHandle = (e) => {
+      console.log(e.target.value)
+      const filtered = tasks.filter((task) => task.title.toLowerCase().includes(e.target.value.toLowerCase()));
+      setFilteredTasks(filtered);
+    }
 
     return (
         <div>
@@ -92,6 +86,7 @@ export default function DashboardComponent() {
                             selectedStatus={selectedStatus}
                             onSelectChange={(value) => setSelectedStatus(value)}
                             options={statusOptions}/>
+                            <Input className='mx-5' type="search" placeholder="Search" onChange={searchHandle} />
                     </div>
                     <div className="flex justify-end">
                         <CreateTaskDialog onSubmit={handleSubmit}/>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
 
+
 interface FilterInputProps {
     selectedStatus: string;
     onSelectChange: (value: string) => void;
@@ -10,7 +11,8 @@ interface FilterInputProps {
 
 const FilterInput: React.FC<FilterInputProps> = ({ selectedStatus, onSelectChange, options }) => {
     return (
-        <div className="flex items-center space-x-4">
+        <>
+        <div className={"flex items-center space-x-4"}>
             <Label>Filter</Label>
             <Select
                 defaultValue={selectedStatus}
@@ -29,7 +31,10 @@ const FilterInput: React.FC<FilterInputProps> = ({ selectedStatus, onSelectChang
                     </SelectGroup>
                 </SelectContent>
             </Select>
+
+            
         </div>
+        </>
     );
 };
 
