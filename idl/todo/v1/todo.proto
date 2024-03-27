@@ -21,6 +21,7 @@ message Task {
     IN_PROGRESS = 1;
     DONE = 2;
   }
+
   Status status = 4;
 }
 
@@ -39,8 +40,6 @@ message CreateTaskRequest {
     (validate.rules).message.required = false
   ];
 
-  // Status of the task (e.g., "To Do," "In Progress," "Done")
-  Task.Status status = 3;
 }
 
 // Request message for updating an existing task

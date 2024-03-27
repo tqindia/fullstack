@@ -1,6 +1,6 @@
 import {ConnectRouter} from "@connectrpc/connect";
 import {TaskService} from "@/cloud/todo/v1/todo_connect";
-import type {CreateTaskRequest, UpdateTaskRequest, DeleteTaskRequest, GetTasksRequest}
+import {type CreateTaskRequest, type UpdateTaskRequest, type DeleteTaskRequest, type GetTasksRequest, Task_Status}
 from "@/cloud/todo/v1/todo_pb";
 import {authContextKey} from "@/lib/server/context/contextKey";
 import {loggedInUser} from "@/lib/server/auth/auth";
@@ -40,7 +40,7 @@ export default(router : ConnectRouter) => router.service(TaskService, {
             const user = await loggedInUser(context.values.get(authContextKey));
 
             // Validate input
-            if (!req.id || !req.title || !req.description || !req.status) {
+            if (!req.id || !req.title || !req.description ) {
                 throw new Error("Invalid input. ID, title, description, and status are required.");
             }
 
@@ -48,6 +48,10 @@ export default(router : ConnectRouter) => router.service(TaskService, {
             // Validate title and description length
             if (req.title.length === 0 || req.description.length === 0) {
                 throw new Error("Invalid input. Title and description cannot be empty.");
+            }
+
+            if(!req.status) {
+                req.status = Task_Status.TODO
             }
 
             // Update the task in Firestore

@@ -44,7 +44,6 @@ export const CreateTaskRequest = /*@__PURE__*/ proto3.makeMessageType(
   () => [
     { no: 1, name: "title", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "description", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "status", kind: "enum", T: proto3.getEnumType(Task_Status) },
   ],
 );
 

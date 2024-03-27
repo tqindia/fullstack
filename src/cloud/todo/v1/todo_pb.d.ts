@@ -95,13 +95,6 @@ export declare class CreateTaskRequest extends Message<CreateTaskRequest> {
    */
   description: string;
 
-  /**
-   * Status of the task (e.g., "To Do," "In Progress," "Done")
-   *
-   * @generated from field: cloud.fullstack.v1.Task.Status status = 3;
-   */
-  status: Task_Status;
-
   constructor(data?: PartialMessage<CreateTaskRequest>);
 
   static readonly runtime: typeof proto3;

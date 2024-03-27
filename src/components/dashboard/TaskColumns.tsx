@@ -122,7 +122,7 @@ const TaskColumns : React.FC < TaskColumnsProps > = ({tasks, onUpdate}) => {
         const request = new UpdateTaskRequest();
         request.title = title;
         request.description = description;
-        request.status = 0;
+        request.status = status;
         request.id = id;
         
         reactToast.promise(apiCloud.update(request), {
