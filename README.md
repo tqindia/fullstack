@@ -4,13 +4,24 @@ Next.js serverless APP with Firebase, React Hooks and ConnectRPC Server, It's a 
 
 ## Motivation 
 
-Before this i used GRPC heavilly in multiple places but i never get chance to impliment stuff like a fullstack developer, It means job will start with proto change and end on production, It will include both frontend and backend changes.  
+Previously, I extensively utilized GRPC across various projects, but I hadn't had the opportunity to implement solutions holistically like a full-stack developer. This role entails managing tasks from proto changes to production deployment, encompassing both frontend and backend development tasks. 
 
 ## Docs
 
 ### API Docs
 - [Buf Docs](https://buf.build/yindia/fullstack/docs/main:cloud.fullstack.v1)
 
+## Tech Stack
+- NextJS
+- React 
+- Typescript
+- React hooks
+- Firebase (Auth + Datastore)
+- Tailwind 
+- [Components - shadcn/ui](https://ui.shadcn.com/)
+- Protobuf
+- ConnectRPC
+- [react-beautiful-dnd](https://github.com/atlassian/react-beautiful-dnd)
 
 ### Code Structure 
 
@@ -48,3 +59,28 @@ Before this i used GRPC heavilly in multiple places but i never get chance to im
 
 ```
 
+## Getting Started
+
+- Update `.env` file with all the firebase secret
+
+- Install all dependancy
+```bash
+npm install 
+```
+
+- Run as a dev server 
+```bash
+npm run dev 
+```
+
+Open : [localhost](http://localhost:8080)
+
+- Build 
+```bash
+npm run build 
+```
+
+- Serve
+```bash
+npm run start 
+```
