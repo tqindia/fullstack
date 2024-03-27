@@ -16,8 +16,8 @@ export default(router : ConnectRouter) => router.service(TaskService, {
             const user = await loggedInUser(context.values.get(authContextKey));
 
             // Validate input
-            if (!req.title || !req.description || !req.status) {
-                throw new Error("Invalid input. Title, description, and status are required.");
+            if (!req.title || !req.description ) {
+                throw new Error("Invalid input. Title and description are required.");
             }
 
             // Validate title and description length
@@ -26,7 +26,7 @@ export default(router : ConnectRouter) => router.service(TaskService, {
             }
 
             // Create a new task in Firestore
-            await useCreateTask({title: req.title, description: req.description, status: req.status, userId: user});
+            await useCreateTask({title: req.title, description: req.description, status: 0, userId: user});
 
             return {message: `Task created with ID:`};
         } catch (error) {
@@ -44,10 +44,6 @@ export default(router : ConnectRouter) => router.service(TaskService, {
                 throw new Error("Invalid input. ID, title, description, and status are required.");
             }
 
-            // Additional validation for title and description
-            if (typeof req.title !== "string" || typeof req.description !== "string") {
-                throw new Error("Invalid input. Title and description must be strings.");
-            }
 
             // Validate title and description length
             if (req.title.length === 0 || req.description.length === 0) {

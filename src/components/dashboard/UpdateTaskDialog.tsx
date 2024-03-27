@@ -16,19 +16,18 @@ import {
 
 interface UpdateTaskDialogProps {
     task: Task;
-    open: boolean;
     handleDelete: (title: Task) => void;
     handleUpdate: (title: string, description: string, status: number, id: string) => void;
 }
 
 const statusOptions = ['To Do', 'In Progress', 'Done'];
 
-const UpdateTaskDialog: React.FC<UpdateTaskDialogProps> = ({ task, open, handleUpdate, handleDelete }) => {
+const UpdateTaskDialog: React.FC<UpdateTaskDialogProps> = ({ task, handleUpdate, handleDelete }) => {
     const [title, setTitle] = useState(task.title);
     const [description, setDescription] = useState(task.description);
     const [status, setStatus] = useState(JSON.stringify(task.status));
-    const [isOpen, setIsOpen] = useState(open);
-
+    const [isOpen, setIsOpen] = useState(false);
+    
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
