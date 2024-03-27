@@ -1,0 +1,122 @@
+syntax = "proto3";
+package cloud.fullstack.v1;
+
+import "validate/validate.proto";
+
+
+// Message representing a task in the task management application
+message Task {
+  // Unique identifier for the task
+  string id = 1;
+
+  // Title of the task
+  string title = 2;
+
+  // Description of the task
+  string description = 3;
+
+  // Status of the task (e.g., "To Do," "In Progress," "Done")
+  enum Status {
+    TODO = 0;
+    IN_PROGRESS = 1;
+    DONE = 2;
+  }
+  Status status = 4;
+}
+
+// Request message for creating a new task
+message CreateTaskRequest {
+  // Title of the task
+  string title = 1 [
+    (validate.rules).map.keys.string.min_len = 3,
+    (validate.rules).map.keys.string.max_len = 100,
+    (validate.rules).message.required = true
+  ];
+
+  // Description of the task
+  string description = 2 [
+    (validate.rules).map.keys.string.max_len = 1000,
+    (validate.rules).message.required = false
+  ];
+
+  // Status of the task (e.g., "To Do," "In Progress," "Done")
+  Task.Status status = 3;
+}
+
+// Request message for updating an existing task
+message UpdateTaskRequest {
+  // Unique identifier of the task to update
+  string id = 1 [
+    (validate.rules).map.keys.string.min_len = 3,
+    (validate.rules).map.keys.string.max_len = 50,
+    (validate.rules).message.required = true
+  ];
+
+  // Title of the task
+  string title = 2 [
+    (validate.rules).map.keys.string.min_len = 3,
+    (validate.rules).map.keys.string.max_len = 100,
+    (validate.rules).message.required = true
+  ];
+
+  // Description of the task
+  string description = 3 [
+    (validate.rules).map.keys.string.max_len = 1000,
+    (validate.rules).message.required = false
+  ];
+  // Updated status of the task (e.g., "To Do," "In Progress," "Done")
+  Task.Status status = 4;
+}
+
+// Request message for deleting a task
+message DeleteTaskRequest {
+  // Unique identifier of the task to delete
+  string id = 1 [
+    (validate.rules).map.keys.string.min_len = 3,
+    (validate.rules).map.keys.string.max_len = 50,
+    (validate.rules).message.required = true
+  ];
+}
+
+// Response message for a successful operation
+message SuccessResponse {
+  // Success message
+  string message = 1;
+
+  string error = 2;
+}
+
+// Request message for fetching tasks
+message GetTasksRequest {
+  int64 page = 1 [
+    (validate.rules).message.required = false
+  ];
+  int64 pageSize = 2 [
+    (validate.rules).message.required = false
+  ];
+}
+
+// Response message containing a list of tasks
+message GetTasksResponse {
+  // List of tasks
+  repeated Task tasks = 1;
+}
+
+// Task service definition
+service TaskService {
+  // Create a new task
+  rpc Create(CreateTaskRequest) returns (SuccessResponse) {
+  }
+
+  // Update an existing task
+  rpc Update(UpdateTaskRequest) returns (SuccessResponse) {
+  }
+
+  // Delete a task
+  rpc Delete(DeleteTaskRequest) returns (SuccessResponse) {
+  }
+
+  // Get a list of tasks
+  rpc Get(GetTasksRequest) returns (GetTasksResponse) {
+  }
+}

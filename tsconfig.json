@@ -1,0 +1,55 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "paths": {
+      "@/cloud/*": [
+        "./src/cloud/*"
+      ],
+      "@/components/*": [
+        "./src/components/*"
+      ],
+      "@/firebase/*": [
+        "./src/firebase/*"
+      ],
+      "@/services/*": [
+        "./src/services/*"
+      ],
+      "@/lib/*": [
+        "./src/lib/*"
+      ],
+      "@/core/*": [
+        "./src/core/*"
+      ],
+      "@/types/*": [
+        "./src/types/*"
+      ],
+      "@/globals": [
+        "./src/globals.css"
+      ],
+      "@/configurations": [
+        "./src/configurations.ts"
+      ],
+      
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
+}

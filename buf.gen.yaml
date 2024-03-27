@@ -1,0 +1,8 @@
+version: v1
+managed:
+  enabled: true
+plugins:
+  - plugin: buf.build/connectrpc/es:v0.13.2
+    out: src/cloud
+  - plugin: buf.build/bufbuild/es
+    out: src/cloud
