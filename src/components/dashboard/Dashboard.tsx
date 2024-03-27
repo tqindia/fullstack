@@ -72,7 +72,7 @@ export default function DashboardComponent() {
         });
     };
 
-    const searchHandle = (e) => {
+    const searchHandle = (e: any) => {
       console.log(e.target.value)
       const filtered = tasks.filter((task) => task.title.toLowerCase().includes(e.target.value.toLowerCase()));
       setFilteredTasks(filtered);
