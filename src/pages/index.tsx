@@ -1,8 +1,6 @@
 import React from "react";
-import {GetServerSidePropsContext, InferGetServerSidePropsType} from "next";
-import nookies from "nookies";
 import dynamic from 'next/dynamic';
-import {userIsLoggedIn} from "@/firebase/auth/utils";
+import { useSession } from "next-auth/react"
 
 const HomeComponent = dynamic(
   () => import('@/components/home/Home'),
@@ -14,32 +12,24 @@ const HomeComponent = dynamic(
 const HeaderComponent = dynamic(
   () => import('@/components/header/Header'),
   {
-    ssr: false,
+    ssr: true,
   }
 );
 
 const DashboardComponent = dynamic(
   () => import('@/components/dashboard/Dashboard'),
   {
-    ssr: false,
+    ssr: true,
   }
 );
 
 
-export default function Index({authenticated} : InferGetServerSidePropsType < typeof getServerSideProps >) {
+export default function Index() {
+  const { data: session } = useSession()
     return ( 
     <> 
-        <HeaderComponent authenticated={authenticated}/>
-        {authenticated ? (<DashboardComponent/>) : (<HomeComponent />)}
+        <HeaderComponent />
+        {session ? (<DashboardComponent/>) : (<HomeComponent />)}
     </>
   );
-}
-
-export async function getServerSideProps(ctx: GetServerSidePropsContext) {
-  const cookies = nookies.get(ctx);
-  const authenticated = await userIsLoggedIn(cookies);
-
-  return {
-    props: { authenticated },
-  };
 }

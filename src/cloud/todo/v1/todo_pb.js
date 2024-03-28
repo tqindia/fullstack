@@ -44,6 +44,7 @@ export const CreateTaskRequest = /*@__PURE__*/ proto3.makeMessageType(
   () => [
     { no: 1, name: "title", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "description", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "userID", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
@@ -59,6 +60,7 @@ export const UpdateTaskRequest = /*@__PURE__*/ proto3.makeMessageType(
     { no: 2, name: "title", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "description", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "status", kind: "enum", T: proto3.getEnumType(Task_Status) },
+    { no: 5, name: "userID", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
@@ -71,6 +73,7 @@ export const DeleteTaskRequest = /*@__PURE__*/ proto3.makeMessageType(
   "cloud.fullstack.v1.DeleteTaskRequest",
   () => [
     { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "userID", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
@@ -97,6 +100,7 @@ export const GetTasksRequest = /*@__PURE__*/ proto3.makeMessageType(
   () => [
     { no: 1, name: "page", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 2, name: "pageSize", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "userID", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
