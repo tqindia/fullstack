@@ -4,6 +4,11 @@ module.exports = {
   experimental: {
     serverActions: true,
   },
+  async rewrites() {
+    return [
+         
+    ];
+} ,
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
