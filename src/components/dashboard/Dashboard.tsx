@@ -57,7 +57,6 @@ export default function DashboardComponent() {
         const request = new CreateTaskRequest();
         request.title = title;
         request.description = description;
-        request.status = 0;
 
         reactToast.promise(apiCloud.create(request), {
             loading: 'Creating Tasks',
