@@ -18,6 +18,9 @@
       "@/cloud/*": [
         "./src/cloud/*"
       ],
+      "@/pages/*": [
+        "./src/pages/*"
+      ],
       "@/components/*": [
         "./src/components/*"
       ],

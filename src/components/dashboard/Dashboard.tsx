@@ -7,9 +7,12 @@ import apiCloud from '@/services/cloud';
 import {useToast} from '@/components/ui/use-toast';
 import {toast as reactToast} from 'react-hot-toast';
 import { Input } from "@/components/ui/input"
+import { useSession} from "next-auth/react"
+import { search } from 'superagent';
 
-export default function DashboardComponent() {
-    const {toast} = useToast();
+const DashboardComponent = () => {
+    const { data: session } = useSession()
+
     const [tasks,
         setTasks] = useState < Task[] > ([]);
     const [filteredTasks,
@@ -31,6 +34,7 @@ export default function DashboardComponent() {
         const request = new GetTasksRequest();
         request.page = BigInt(1);
         request.pageSize = BigInt(100);
+        request.userID = session?.user?.email as string
         reactToast.promise(apiCloud.get(request), {
             loading: 'Fetching Tasks',
             success: 'Task Fetched Succesfully',
@@ -57,6 +61,7 @@ export default function DashboardComponent() {
         const request = new CreateTaskRequest();
         request.title = title;
         request.description = description;
+        request.userID = session?.user?.email as string,
 
         reactToast.promise(apiCloud.create(request), {
             loading: 'Creating Tasks',
@@ -72,7 +77,6 @@ export default function DashboardComponent() {
     };
 
     const searchHandle = (e: any) => {
-      console.log(e.target.value)
       const filtered = tasks.filter((task) => task.title.toLowerCase().includes(e.target.value.toLowerCase()));
       setFilteredTasks(filtered);
     }
@@ -93,13 +97,15 @@ export default function DashboardComponent() {
                     </div>
                 </div>
             </div>
-            (
-            <TaskColumns
+            {tasks.length > 0 && (
+                <TaskColumns
                 tasks={filteredTasks}
                 onUpdate={() => {
                 setIsChanged(!isChanged)
             }}/>
-            )
+            )}
         </div>
     );
 }
+
+export default DashboardComponent;

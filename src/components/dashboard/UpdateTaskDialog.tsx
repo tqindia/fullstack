@@ -23,6 +23,7 @@ interface UpdateTaskDialogProps {
 const statusOptions = ['To Do', 'In Progress', 'Done'];
 
 const UpdateTaskDialog: React.FC<UpdateTaskDialogProps> = ({ task, handleUpdate, handleDelete }) => {
+
     const [title, setTitle] = useState(task.title);
     const [description, setDescription] = useState(task.description);
     const [status, setStatus] = useState(JSON.stringify(task.status));

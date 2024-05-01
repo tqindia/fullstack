@@ -95,6 +95,13 @@ export declare class CreateTaskRequest extends Message<CreateTaskRequest> {
    */
   description: string;
 
+  /**
+   * Description of the task
+   *
+   * @generated from field: string userID = 3;
+   */
+  userID: string;
+
   constructor(data?: PartialMessage<CreateTaskRequest>);
 
   static readonly runtime: typeof proto3;
@@ -144,6 +151,13 @@ export declare class UpdateTaskRequest extends Message<UpdateTaskRequest> {
    */
   status: Task_Status;
 
+  /**
+   * Description of the task
+   *
+   * @generated from field: string userID = 5;
+   */
+  userID: string;
+
   constructor(data?: PartialMessage<UpdateTaskRequest>);
 
   static readonly runtime: typeof proto3;
@@ -171,6 +185,13 @@ export declare class DeleteTaskRequest extends Message<DeleteTaskRequest> {
    * @generated from field: string id = 1;
    */
   id: string;
+
+  /**
+   * Description of the task
+   *
+   * @generated from field: string userID = 2;
+   */
+  userID: string;
 
   constructor(data?: PartialMessage<DeleteTaskRequest>);
 
@@ -235,6 +256,13 @@ export declare class GetTasksRequest extends Message<GetTasksRequest> {
    * @generated from field: int64 pageSize = 2;
    */
   pageSize: bigint;
+
+  /**
+   * Description of the task
+   *
+   * @generated from field: string userID = 3;
+   */
+  userID: string;
 
   constructor(data?: PartialMessage<GetTasksRequest>);
 
