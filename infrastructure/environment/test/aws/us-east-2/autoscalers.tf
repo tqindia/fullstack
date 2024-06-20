@@ -1,24 +1,24 @@
 
   module "autoscalers"  {
-    namespace = "autoscaler"
-    create_namespace = true
-    atomic = true
+    repository = "https://kubernetes.github.io/autoscaler"
+    max_history = 16
+    layer_name = "test-us-east-2"
     version = "0.0.1"
+    timeout = 23
+    create_namespace = true
+    chart_version = "9.37.0"
     values "autoDiscovery"  {
       clusterName = "${module.k8scluster.k8s_cluster_name}"
     }
-    timeout = 23
-    repository = "https://kubernetes.github.io/autoscaler"
-    dependency_update = 
     wait = true
-    layer_name = "test-us-east-2"
+    source = "tqindia/cops/cloud/module/autoscaler"
+    namespace = "autoscaler"
+    atomic = true
     cleanup_on_fail = true
-    chart_version = "9.37.0"
     values_files = [
       
     ]
+    dependency_update = 
     wait_for_jobs = true
-    max_history = 16
     env_name = "test-us-east-2"
-    source = "tqindia/cops/cloud/module/autoscaler"
   }
