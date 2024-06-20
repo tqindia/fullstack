@@ -1,6 +1,51 @@
 
   output = [
     {
+      user_arn = {
+        value = "${module.sdfs.user_arn}"
+      }
+    },
+    {
+      role_arn = {
+        value = "${module.iamrole.role_arn}"
+      }
+    },
+    {
+      queue_arn = {
+        value = "${module.sqs.queue_arn}"
+      }
+    },
+    {
+      queue_name = {
+        value = "${module.sqs.queue_name}"
+      }
+    },
+    {
+      queue_id = {
+        value = "${module.sqs.queue_id}"
+      }
+    },
+    {
+      kms_arn = {
+        value = "${module.sqs.kms_arn}"
+      }
+    },
+    {
+      bucket_arn = {
+        value = "${module.s3.bucket_arn}"
+      }
+    },
+    {
+      bucket_id = {
+        value = "${module.s3.bucket_id}"
+      }
+    },
+    {
+      cloudfront_read_path = {
+        value = "${module.s3.cloudfront_read_path}"
+      }
+    },
+    {
       k8s_endpoint = {
         value = "${module.k8scluster.k8s_endpoint}"
       }

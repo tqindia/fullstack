@@ -1,23 +1,23 @@
 
   module "ingress"  {
-    atomic = true
+    chart_version = "4.10.1"
     dependency_update = 
-    layer_name = "test-us-east-2"
+    create_namespace = true
     values_files = [
       
     ]
-    timeout = 23
-    wait = true
     repository = "https://kubernetes.github.io/ingress-nginx"
-    create_namespace = true
+    cleanup_on_fail = true
     values  {
       
     }
-    env_name = "test-us-east-2"
-    source = "tqindia/cops/cloud/module/ingress"
-    version = "0.0.1"
-    cleanup_on_fail = true
-    chart_version = "4.10.1"
+    timeout = 23
+    wait = true
     wait_for_jobs = true
     max_history = 16
+    env_name = "test-us-east-2"
+    atomic = true
+    source = "tqindia/cops/cloud/module/ingress"
+    version = "0.0.1"
+    layer_name = "test-us-east-2"
   }
